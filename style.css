@@ -25,7 +25,7 @@ input#typeans {
   font-size: 18px;
 }
 
-#enterfurigana {
+#entertext {
   width: 60% !important;
   font-size: 40px !important;
   // height: 50px !important;
@@ -38,5 +38,5 @@ input#typeans {
 
 
 .hide:hover {
-	opacity: 1;
+  opacity: 1;
 }
