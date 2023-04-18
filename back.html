@@ -1,0 +1,130 @@
+{{FrontSide}}
+<hr id=answer>
+{{Vocabulary-Audio}}
+{{Sentence-Audio}}
+<span style="font-size: 30px;">{{edit:Vocabulary-English}}</span>
+<br>
+<span style="font-size: 35px;" class="gothic">{{edit:Vocabulary-Kana}}</span>
+<br>
+<input type="text" id=entertext class="gothic"　autofocus>
+<br>
+<span style="font-size: 14px;" class="gothic">{{Vocabulary-Pos}}</span>
+<br>
+
+<!--
+<span style="font-size: 40px;" class="hide" class="gothic">{{edit:furigana:Reading}}</span>
+-->
+
+<div>
+<span style="font-size: 40px;" class="hide gothic expression">{{edit:furigana:Expression}}</span>
+</div>
+<div class="hide english">
+   <br>
+   <span style="font-size: 25px; ">{{Sentence-English}}</span>
+   <div style="display: none">
+      <br>
+      
+      <br>
+   </div>
+</div>
+
+<script type="text/javascript">
+var coreIndex = "{{Core-Index}}";
+(() => {
+  document.querySelector("#entertext").focus();
+  if (document.querySelector("body").classList.contains('customBackScriptHasRun')) return;
+  const controlPressed = (event) => {
+    const el = document.querySelector("#entertext");
+    el.focus();
+  }
+
+  const shiftPressed = (event) => {
+    const expression = document.querySelector(".expression");
+    const english = document.querySelector(".english");
+    if (!expression) return;
+    if (event.type === 'keydown') {
+      if (english && event.altKey && event.shiftKey) {
+        english.classList.remove('hide');
+      } else {
+        expression.classList.remove('hide');
+      }
+    }
+    if (event.type === 'keyup') {
+      expression.classList.add('hide');
+      if (english) english.classList.add('hide');
+    }
+  }
+
+  const dontPropagate = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+
+  const changeColor = (event) => {
+    if (!(event.srcElement && event.srcElement.value)) return;
+    const expression = document.querySelector(".expression");
+    if (!expression) return;
+    if (expression.textContent.replace(/\n/, '').trim() === event.srcElement.value.trim()) {
+      event.srcElement.style.backgroundColor = '#aaffaa1a';
+    } else {
+      event.srcElement.style.backgroundColor = '';
+    }
+  }
+
+  document.addEventListener('input', changeColor);
+  document.addEventListener('change', changeColor);
+  document.addEventListener('compositionstart', changeColor);
+  document.addEventListener('compositionupdate', changeColor);
+  document.addEventListener('compositionend', changeColor);
+
+  document.addEventListener('keydown', (event) => {
+    changeColor(event);
+    switch (event.key) {
+      case ('Control'):
+        controlPressed(event);
+        // dontPropagate(event);
+        break;
+      case ('Shift'):
+        shiftPressed(event);
+        dontPropagate(event);
+        break;
+      case ('Alt'):
+        shiftPressed(event);
+        dontPropagate(event);
+        break;
+      case ('F2'):
+        destroyIframe();
+        pycmd('ease1');
+        dontPropagate(event);
+        break;
+      case ('F3'):
+        destroyIframe();
+        pycmd("ease3");
+        dontPropagate(event);
+        break;
+      case ('F4'):
+        pycmd('play:a:0');
+        dontPropagate(event);
+        break;
+      case ('F6'):
+        pycmd('play:a:1');
+        dontPropagate(event);
+        break;
+    }
+  });
+
+  document.addEventListener('keyup', (event) => {
+    switch (event.key) {
+      case ('Shift'):
+        shiftPressed(event);
+        dontPropagate(event);
+        break;
+    }
+  });
+
+  setTimeout(() => {
+    document.querySelector("body").classList.add('customBackScriptHasRun');
+  });
+})()
+</script>
