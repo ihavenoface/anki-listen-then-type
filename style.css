@@ -1,0 +1,42 @@
+.card,
+input {
+  font-family: arial;
+  font-size: 25px;
+  text-align: center;
+  // color: White;
+  // background-color: Black;
+}
+
+.card .gothic,
+.gothic,
+input {
+  font-family: IPAexGothic !important;
+}
+
+input#typeans {
+  font-family: IPAexGothic !important;
+  font-size: 50px !important;
+  height: 65px;
+  width: 25%;
+}
+
+#typeans {
+  font-family: IPAexGothic !important;
+  font-size: 18px;
+}
+
+#enterfurigana {
+  width: 60% !important;
+  font-size: 40px !important;
+  // height: 50px !important;
+  // display: none !important;
+}
+
+.hide {
+  opacity: 0;
+}
+
+
+.hide:hover {
+	opacity: 1;
+}
